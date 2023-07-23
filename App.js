@@ -75,13 +75,13 @@ export default function App() {
               </TouchableOpacity>
             </View>
             <View style={styles.operationContainerView}>
-              <TouchableOpacity onPress={() => { onClickButton(7) }} style={styles.operationButton}>
+              <TouchableOpacity onPress={() => onClickButton(7)} style={styles.operationButton}>
                 <Text style={styles.numbersText}>7</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => { onClickButton(8) }} style={styles.operationButton}>
+              <TouchableOpacity onPress={() => onClickButton(8)} style={styles.operationButton}>
                 <Text style={styles.numbersText}>8</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => { onClickButton(9) }} style={styles.operationButton}>
+              <TouchableOpacity onPress={() => onClickButton(9)} style={styles.operationButton}>
                 <Text style={styles.numbersText}>9</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => { onClickOperation('*') }} style={styles.operationButton}>
@@ -89,13 +89,13 @@ export default function App() {
               </TouchableOpacity>
             </View>
             <View style={styles.operationContainerView}>
-              <TouchableOpacity onPress={() => { onClickButton(4) }} style={styles.operationButton}>
+              <TouchableOpacity onPress={() => onClickButton(4)} style={styles.operationButton}>
                 <Text style={styles.numbersText}>4</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => { onClickButton(5) }} style={styles.operationButton}>
+              <TouchableOpacity onPress={() => onClickButton(5)} style={styles.operationButton}>
                 <Text style={styles.numbersText}>5</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => { onClickButton(6) }} style={styles.operationButton}>
+              <TouchableOpacity onPress={() => onClickButton(6)} style={styles.operationButton}>
                 <Text style={styles.numbersText}>6</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => { onClickOperation('-') }} style={styles.operationButton}>
@@ -103,13 +103,13 @@ export default function App() {
               </TouchableOpacity>
             </View>
             <View style={styles.operationContainerView}>
-              <TouchableOpacity onPress={() => { onClickButton(1) }} style={styles.operationButton}>
+              <TouchableOpacity onPress={() => onClickButton(1)} style={styles.operationButton}>
                 <Text style={styles.numbersText}>1</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => { onClickButton(2) }} style={styles.operationButton}>
+              <TouchableOpacity onPress={() => onClickButton(2)} style={styles.operationButton}>
                 <Text style={styles.numbersText}>2</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => { onClickButton(3) }} style={styles.operationButton}>
+              <TouchableOpacity onPress={() => onClickButton(3)} style={styles.operationButton}>
                 <Text style={styles.numbersText}>3</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => { onClickOperation('+') }} style={styles.operationButton}>
@@ -150,36 +150,39 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   result: {
-    flex: 5,
     justifyContent: 'center',
     alignItems: 'flex-end',
+    height: hp('25'),
+    width: wp('100'),
   },
   resultText: {
-    fontSize: hp('4'),
-    fontWeight: '300',
+    fontSize: hp('3.5'),
+    fontWeight: '400',
     color: 'white',
     marginRight: wp('10')
   },
   calculation: {
-    flex: 2,
     justifyContent: 'center',
     alignItems: 'flex-end',
+    height: hp('22.5'),
+    width: wp('100'),
   },
   calculationText: {
-    fontSize: hp('4'),
+    fontSize: hp('2.5'),
     color: 'white',
-    marginBottom: hp('5'),
-    fontWeight: '300',
+    fontWeight: '400',
     marginRight: wp('10')
   },
   buttonContainerView: {
-    flex: 7,
     flexDirection: 'row',
     marginBottom: hp('7.5'),
     position: 'relative',
+    height: hp('45'),
+    width: wp('100'),
   },
   numberContainerView: {
-    flex: 3,
+    height: hp('45'),
+    width: wp('100'),
   },
   operationContainerView: {
     flexDirection: 'row',
