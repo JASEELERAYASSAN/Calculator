@@ -1,14 +1,210 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 
-const App = () => {
+export default function App() {
+
+  const [resultTexts, setResultText] = useState('')
+  const [calcText, setCalcText] = useState('')
+
+  const onClickButton = (text) => {
+    console.log(text);
+    if (text === '=') {
+      return calculation();
+    }
+    setResultText(resultTexts + text)
+  }
+
+  const calculation = () => {
+    setCalcText(eval(resultTexts))
+  }
+
+  const onClickOperation = (text) => {
+    let operations = ['DEL', 'C', '+', '-', '*', '/']
+    if (text === 'C') {
+      setResultText('')
+      setCalcText('')
+      return;
+    }
+    if (text === 'DEL') {
+      return setResultText(resultTexts.toString().substring(0, resultTexts.length - 1))
+    }
+    if (operations.includes(resultTexts.toString().split('').pop())) return
+    setResultText(resultTexts + text)
+  }
+
   return (
-    <View>
-      <Text>App</Text>
+    <View style={styles.container}>
+      <ImageBackground source={require('./src/assets/background.jpg')}
+        resizeMode='center' style={styles.backgroundImage}>
+        <View style={styles.result}>
+          <Text style={styles.resultText}>{calcText}</Text>
+        </View>
+        <View style={styles.calculation}>
+          <Text style={styles.calculationText}>{resultTexts}</Text>
+        </View>
+        <View style={styles.buttonContainerView}>
+          <View style={styles.numberContainerView}>
+            <View style={styles.operationContainerView}>
+              <TouchableOpacity onPress={() => { onClickOperation('C') }} style={styles.operationButton}>
+                <Text style={styles.operationText}>C</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => { onClickOperation('DEL') }} style={styles.operationButton}>
+                <Text style={styles.operationText}>DEL</Text>
+              </TouchableOpacity>
+              <View style={{ justifyContent: 'center' }}>
+                <TouchableOpacity onPress={() => { onClickOperation('%') }} style={styles.operationButton}>
+                  <Text style={styles.operationText}>%</Text>
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity onPress={() => { onClickOperation('/') }} style={styles.operationButton}>
+                <Text style={styles.operationText}>/</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.operationContainerView}>
+              <TouchableOpacity onPress={() => { onClickButton(7) }} style={styles.operationButton}>
+                <Text style={styles.numbersText}>7</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => { onClickButton(8) }} style={styles.operationButton}>
+                <Text style={styles.numbersText}>8</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => { onClickButton(9) }} style={styles.operationButton}>
+                <Text style={styles.numbersText}>9</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => { onClickOperation('*') }} style={styles.operationButton}>
+                <Text style={styles.operationText}>x</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.operationContainerView}>
+              <TouchableOpacity onPress={() => { onClickButton(4) }} style={styles.operationButton}>
+                <Text style={styles.numbersText}>4</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => { onClickButton(5) }} style={styles.operationButton}>
+                <Text style={styles.numbersText}>5</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => { onClickButton(6) }} style={styles.operationButton}>
+                <Text style={styles.numbersText}>6</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => { onClickOperation('-') }} style={styles.operationButton}>
+                <Text style={styles.operationText}>–</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.operationContainerView}>
+              <TouchableOpacity onPress={() => { onClickButton(1) }} style={styles.operationButton}>
+                <Text style={styles.numbersText}>1</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => { onClickButton(2) }} style={styles.operationButton}>
+                <Text style={styles.numbersText}>2</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => { onClickButton(3) }} style={styles.operationButton}>
+                <Text style={styles.numbersText}>3</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => { onClickOperation('+') }} style={styles.operationButton}>
+                <Text style={styles.operationText}>+</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.operationContainerView}>
+              <TouchableOpacity onPress={() => { onClickButton('0') }} style={styles.operationButton}>
+                <Text style={styles.numbersText}>0</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => { onClickButton('00') }} style={styles.operationButton}>
+                <Text style={styles.numbersText}>00</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => { onClickButton('.') }} style={styles.operationButton}>
+                <Text style={styles.numbersText}>.</Text>
+              </TouchableOpacity>
+              <View style={styles.operationEqualContainer}>
+                <TouchableOpacity onPress={() => { onClickButton('=') }} style={styles.operationEqualButton}>
+                  <Text style={styles.operationEqualText}>=</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </View>
+      </ImageBackground>
     </View>
   )
 }
 
-export default App
-
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#000'
+  },
+  backgroundImage: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  result: {
+    flex: 5,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+  resultText: {
+    fontSize: hp('4'),
+    fontWeight: '300',
+    color: 'white',
+    marginRight: wp('10')
+  },
+  calculation: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+  calculationText: {
+    fontSize: hp('4'),
+    color: 'white',
+    marginBottom: hp('5'),
+    fontWeight: '300',
+    marginRight: wp('10')
+  },
+  buttonContainerView: {
+    flex: 7,
+    flexDirection: 'row',
+    marginBottom: hp('7.5'),
+    position: 'relative',
+  },
+  numberContainerView: {
+    flex: 3,
+  },
+  operationContainerView: {
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  operationButton: {
+    height: hp('5'),
+    width: wp('20'),
+  },
+  operationEqualContainer: {
+    height: hp('5'),
+    width: wp('20'),
+    alignItems: 'center'
+  },
+  operationEqualButton: {
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+    backgroundColor: 'green'
+  },
+  operationText: {
+    fontSize: hp('3.5'),
+    color: 'green',
+    textAlign: 'center',
+    fontWeight: '400',
+  },
+  operationEqualText: {
+    fontSize: hp('3.5'),
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: '400',
+  },
+  numbersText: {
+    fontSize: hp('3.5'),
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: '900'
+  },
+})
