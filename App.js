@@ -8,7 +8,6 @@ export default function App() {
   const [calcText, setCalcText] = useState('')
 
   const onClickButton = (text) => {
-    console.log(text);
     if (text === '=') {
       return calculation();
     }
@@ -16,8 +15,22 @@ export default function App() {
   }
 
   const calculation = () => {
-    setCalcText(eval(resultTexts))
-  }
+    try {
+      // Use JavaScript's built-in Function constructor to evaluate the expression
+      const result = new Function('return ' + resultTexts)();
+
+      // Check if the result is a valid number
+      if (isNaN(result) || !isFinite(result)) {
+        setCalcText('Invalid Expression');
+      } else {
+        setCalcText(result);
+      }
+    } catch (error) {
+      // If an error occurs during evaluation, display "Invalid Expression"
+      setCalcText('Invalid Expression');
+    }
+  };
+
 
   const onClickOperation = (text) => {
     let operations = ['DEL', 'C', '+', '-', '*', '/']
