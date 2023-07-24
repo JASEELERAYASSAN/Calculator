@@ -175,9 +175,8 @@ const styles = StyleSheet.create({
   },
   buttonContainerView: {
     flexDirection: 'row',
-    marginBottom: hp('7.5'),
     position: 'relative',
-    height: hp('45'),
+    height: hp('40'),
     width: wp('100'),
   },
   numberContainerView: {
@@ -193,17 +192,21 @@ const styles = StyleSheet.create({
   operationButton: {
     height: hp('5'),
     width: wp('20'),
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
   operationEqualContainer: {
     height: hp('5'),
     width: wp('20'),
-    alignItems: 'center'
+    alignItems: 'center',
   },
   operationEqualButton: {
     height: 40,
     width: 40,
     borderRadius: 20,
-    backgroundColor: 'green'
+    backgroundColor: 'green',
+    alignItems: 'center',
+    justifyContent:'center'
   },
   operationText: {
     fontSize: hp('3.5'),
